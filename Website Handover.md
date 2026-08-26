@@ -139,9 +139,9 @@ The landing page renders sections in this order:
 ### 6.1 `<ComparisonTable />` — "Execution, Without Friction" Model Comparison Table
 - **File**: `src/components/comparison-table.tsx`
 - **Location**: Positioned directly after `<ImpactMetrics />` and before `<HowItWorks />`.
-- **Header**: Single bold manifesto statement with expressive kinetic typography:
-  - **Line 1**: *Tired of* <span className="text-[#EA7A24]">**Chasing**</span> *(animated running forward sprint motion)* *Freelancers,* <span className="text-amber-300">**Managing**</span> *(hectic tilted/jitter angle)*
-  - **Line 2**: *Platforms, and* <span className="text-rose-400">**Paying Agency Prices**</span> *(with rising inflation badge `↑$$$`)*?
+- **Header**: Clean, uniform bold statement in large manifesto typography with inline contextual emoji icons:
+  - *Tired of Chasing 🏃 Freelancers, Managing ⚙️*
+  - *Platforms, and Paying Agency Prices 💸?*
   - Paired with a right-aligned orange **"Book a Discovery Call"** CTA button.
 - **Model Comparison Table**:
   - Clean uniform horizontal table grid with subtle dividers (`divide-white/[0.06]`).

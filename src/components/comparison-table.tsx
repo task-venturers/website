@@ -67,31 +67,6 @@ export default function ComparisonTable() {
   return (
     <section className="relative w-full pt-20 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 lg:pb-32 bg-[#070707] font-sans overflow-hidden">
       {/* Dynamic Keyframes for Kinetic Typography */}
-      <style jsx global>{`
-        @keyframes chaseSprint {
-          0%, 100% {
-            transform: translateX(0) skewX(-12deg);
-          }
-          30% {
-            transform: translateX(5px) translateY(-2px) skewX(-18deg);
-          }
-          60% {
-            transform: translateX(2px) translateY(0) skewX(-10deg);
-          }
-          85% {
-            transform: translateX(6px) translateY(-1.5px) skewX(-16deg);
-          }
-        }
-        @keyframes hecticJitter {
-          0%, 100% {
-            transform: rotate(-4deg) scale(0.98);
-          }
-          50% {
-            transform: rotate(3.5deg) scale(1.02);
-          }
-        }
-      `}</style>
-
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
@@ -117,33 +92,13 @@ export default function ComparisonTable() {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         
         {/* ========================================================================= */}
-        {/* SECTION HEADER: BOLD STATEMENT WITH KINETIC ANIMATIONS + RIGHT CTA BUTTON */}
+        {/* SECTION HEADER: CLEAN BOLD STATEMENT + INLINE ICONS + RIGHT CTA BUTTON    */}
         {/* ========================================================================= */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           {/* Left Column: Bold Statement */}
           <h2 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold text-white leading-[1.38] tracking-tight font-sans text-left max-w-4xl">
-            Tired of{" "}
-            {/* Running "Chasing" */}
-            <span className="inline-block relative italic font-extrabold text-[#EA7A24] animate-[chaseSprint_1.8s_ease-in-out_infinite] origin-bottom tracking-normal pr-0.5">
-              Chasing
-            </span>{" "}
-            Freelancers,{" "}
-            {/* Hectic Tilted "Managing" */}
-            <span className="inline-block relative font-serif italic text-amber-300 rotate-[-4deg] animate-[hecticJitter_2.4s_ease-in-out_infinite] origin-center px-1">
-              Managing
-            </span>{" "}
-            <br className="hidden sm:inline" />
-            Platforms, and{" "}
-            {/* Expensive "Paying Agency Prices" */}
-            <span className="relative inline-flex items-center gap-1.5 text-rose-400">
-              <span className="underline decoration-rose-500/50 decoration-wavy decoration-1 underline-offset-4">
-                Paying Agency Prices
-              </span>
-              <span className="inline-flex items-center text-[11px] sm:text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-400 align-middle animate-bounce">
-                ↑$$$
-              </span>
-            </span>
-            ?
+            Tired of Chasing 🏃 Freelancers, Managing ⚙️ <br className="hidden sm:inline" />
+            Platforms, and Paying Agency Prices 💸?
           </h2>
 
           {/* Right Column: CTA Button */}
