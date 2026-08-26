@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# standalone sub-apps
+/apps/
+
+# scratch root design artifacts
+/*.png
