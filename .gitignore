@@ -43,5 +43,8 @@ next-env.d.ts
 # standalone sub-apps
 /apps/
 
+# raw design scratchpad assets
+/raw-design-assets/
+
 # scratch root design artifacts
 /*.png
