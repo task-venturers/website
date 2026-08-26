@@ -30,19 +30,19 @@ function BrandAsterisk() {
 export default function ReasonsToHire() {
   // Marquee phrase repeated across the continuous loop track
   const marqueePhrases = [
-    "DELEGATE SMARTER.",
-    "SCALE FASTER.",
-    "BACKED BY AN EXPERIENCED TEAM.",
-    "DELEGATE SMARTER.",
-    "SCALE FASTER.",
-    "BACKED BY AN EXPERIENCED TEAM.",
-    "DELEGATE SMARTER.",
-    "SCALE FASTER.",
-    "BACKED BY AN EXPERIENCED TEAM.",
+    "DELEGATE SMARTER",
+    "SCALE FASTER",
+    "BACKED BY AN EXPERIENCED TEAM",
+    "DELEGATE SMARTER",
+    "SCALE FASTER",
+    "BACKED BY AN EXPERIENCED TEAM",
+    "DELEGATE SMARTER",
+    "SCALE FASTER",
+    "BACKED BY AN EXPERIENCED TEAM",
   ];
 
   return (
-    <section className="relative w-full pt-0 pb-16 sm:pb-24 lg:pb-28 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-0 pb-6 sm:pb-8 lg:pb-10 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
@@ -68,7 +68,7 @@ export default function ReasonsToHire() {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         
         {/* Main Content Card Container with Full Width & Balanced Symmetrical Vertical Padding */}
-        <div className="relative w-full rounded-3xl sm:rounded-[36px] bg-[#0c0d12]/95 border border-white/[0.08] shadow-[0_24px_80px_rgba(0,0,0,0.7)] backdrop-blur-2xl pt-10 sm:pt-12 md:pt-14 lg:pt-14 px-8 sm:px-12 md:px-14 lg:px-16 pb-0 overflow-hidden flex flex-col">
+        <div className="relative w-full rounded-3xl sm:rounded-[36px] bg-[#0c0d12]/95 border border-white/[0.08] shadow-2xl shadow-black/40 backdrop-blur-2xl pt-10 sm:pt-12 md:pt-14 lg:pt-14 px-8 sm:px-12 md:px-14 lg:px-16 pb-0 overflow-hidden flex flex-col">
           
           {/* ========================================================================= */}
           {/* ATMOSPHERIC WARM ORANGE GLOW                                              */}
@@ -202,12 +202,12 @@ export default function ReasonsToHire() {
 
           </div>
 
-          {/* Top Line Above Ticker with Graceful Fade on Both Sides */}
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent relative z-10" />
+          {/* Top Line Above Ticker */}
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent relative z-10" />
 
-          {/* Bottom Continuous Scrolling Marquee Strip (Gracefully Fading on Left and Right Sides) */}
+          {/* Bottom Continuous Scrolling Marquee Strip */}
           <div
-            className="marquee-group w-full py-3.5 sm:py-4 bg-[#07080b]/90 overflow-hidden relative select-none z-10 rounded-b-3xl sm:rounded-b-[36px]"
+            className="w-full py-4 sm:py-5 overflow-hidden relative select-none z-10"
             style={{
               maskImage:
                 "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
@@ -215,7 +215,7 @@ export default function ReasonsToHire() {
                 "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
             }}
           >
-            <div className="flex w-max">
+            <div className="marquee-group flex w-max">
               {/* Track 1 */}
               <div className="animate-marquee flex items-center shrink-0">
                 {marqueePhrases.map((phrase, idx) => (

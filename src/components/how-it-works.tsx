@@ -28,7 +28,7 @@ import {
 
 export default function HowItWorks() {
   return (
-    <section className="relative w-full pt-28 sm:pt-36 lg:pt-40 pb-6 sm:pb-8 lg:pb-10 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-0 sm:pt-0 lg:pt-0 pb-12 sm:pb-16 lg:pb-20 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
@@ -52,37 +52,11 @@ export default function HowItWorks() {
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
-        
-        {/* ========================================================================= */}
-        {/* SECTION HEADER: LEFT ALIGNED TITLE + RIGHT CTA BUTTON (NO PARAGRAPH)      */}
-        {/* ========================================================================= */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10 sm:mb-14 lg:mb-16 pb-2">
-          
-          {/* Left Column: Heading */}
-          <div className="max-w-2xl text-left">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold text-white tracking-tight leading-[1.16]">
-              Your dedicated assistant, ready in{" "}
-              <span className="text-[#EA7A24]">4 clear steps.</span>
-            </h2>
-          </div>
-
-          {/* Right Column: CTA Button */}
-          <div className="shrink-0 flex items-center lg:justify-end">
-            <Link
-              href="/app/scheduling-flow"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#EA7A24] hover:bg-[#f28834] active:scale-[0.98] text-neutral-950 font-bold text-sm sm:text-base transition-all duration-150 shadow-md cursor-pointer select-none"
-            >
-              <span>Book a Discovery Call</span>
-              <ArrowUpRight className="w-4 h-4 stroke-[2.6]" />
-            </Link>
-          </div>
-        </div>
-
         {/* ========================================================================= */}
         {/* 4-COLUMN CONTINUOUS GRID WITH FADED GHOST CARDS (TOP & BOTTOM)            */}
         {/* ========================================================================= */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 items-start relative"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 items-start relative z-10"
           style={{
             maskImage:
               "linear-gradient(to bottom, transparent 0%, black 18%, black 70%, transparent 100%)",

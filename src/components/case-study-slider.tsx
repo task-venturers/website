@@ -236,7 +236,6 @@ export default function CaseStudySlider() {
             return (
               <div
                 key={item.id}
-                onMouseEnter={() => setActiveId(item.id)}
                 onClick={() => setActiveId(item.id)}
                 className={`relative h-full rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   isExpanded

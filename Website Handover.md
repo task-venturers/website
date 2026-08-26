@@ -76,7 +76,7 @@ Task Venturers/
 ├── src/
 │   ├── app/                         # Next.js App Router
 │   │   ├── page.tsx                 # Landing page (root "/")
-│   │   ├── layout.tsx               # Root layout (fonts, meta, Navbar)
+│   │   ├── layout.tsx               # Root layout (Bricolage Grotesque Google Font, meta, Navbar)
 │   │   ├── globals.css              # Global CSS, Tailwind, keyframes
 │   │   ├── api/                     # API routes
 │   │   │   └── calendar/            # Calendar endpoints (availability, bookings, users)
@@ -136,16 +136,36 @@ The landing page renders sections in this order:
 
 ## 6. Recently Completed Work
 
-### 6.1 `<ComparisonTable />` — "Execution, Without Friction" Model Comparison Table
-- **File**: `src/components/comparison-table.tsx`
-- **Location**: Positioned directly after `<ImpactMetrics />` and before `<HowItWorks />`.
-- **Header**: Clean, uniform bold statement in large manifesto typography with inline contextual emoji icons:
-  - *Tired of Chasing 🏃 Freelancers, Managing ⚙️*
-  - *Platforms, and Paying Agency Prices 💸?*
-  - Paired with a right-aligned orange **"Book a Discovery Call"** CTA button.
-- **Model Comparison Table**:
-  - Clean uniform horizontal table grid with subtle dividers (`divide-white/[0.06]`).
-  - Differentiates across 4 categories: *Freelancers*, *Fiverr / Upwork*, *Other Agencies*, and *Task Venturers*.
+### 2.1 `<Hero />` & `<CaseStudySlider />` — Full-Screen Hero & Interactive Accordion
+- **Location**: Top of landing page.
+- **Hero Headline**: Large brand heading with glowing orange highlights and Discovery Call primary CTA.
+- **Case Study Accordion Track**:
+  - Displays 5 client case studies (*Attent*, *Kinetix*, *Quantum VSL*, *Redbird*, *Cadion*).
+  - **`Cadion`** is open and expanded by default.
+  - Cards expand **strictly on click** (`onClick`), with hover triggers disabled so users have full control over browsing.
+
+---
+
+### 6.1 Landing Page Section Sequence (`src/app/page.tsx`)
+1. `<Navbar />` (Sticky header, fixed-on-mount blur fix)
+2. `<Hero />` & `<CaseStudySlider />` (Full-screen hero + interactive accordion, Cadion default, click-only expand)
+3. `<AboutManifesto />` (Questionnaire & Matching)
+4. `<PartnerMarquee />` (Logo slider)
+5. `<ServicesBento />` (6 Services bento grid)
+6. `<ImpactMetrics />` (Ultra-slim numbers strip)
+7. `<ComparisonTable />` (Execution, Without Friction comparison table)
+8. `<ReasonsToHire />` (26 Reasons brochure CTA card):
+   - **Clean Marquee Phrases**: Removed trailing periods from all phrases (`DELEGATE SMARTER`, `SCALE FASTER`, `BACKED BY AN EXPERIENCED TEAM`) for clean typography between orange asterisks.
+   - **Symmetrical Marquee Mask Fade**: Moved mask gradient onto the outer `w-full` container div (`linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)`), guaranteeing both the left and right edges inside the card frame fade gracefully into view.
+   - **Contained Card Shadow**: Replaced `shadow-[0_24px_80px_rgba(0,0,0,0.7)]` with `shadow-2xl shadow-black/40` so the card shadow is cleanly contained within the card bounds and no longer projects a dark clipping block over the bottom section boundary.
+   - **Unified Card Background**: Marquee ticker strip background made seamlessly transparent so the dark card tone and corner radiuses are 100% unified without color shifts in the corners.
+9. `<Testimonials />` (Social proof masonry wall):
+   - **Header**: Updated to Title Case: *Don't Take* <span className="text-[#EA7A24]">**Our Word for It**</span> with social proof avatar pill stack.
+   - **Unified Section Background**: Configured with identical `#070707` dark background and calibrated film grain filter matching `<ComparisonTable />` and `<ServicesBento />` with 100% pixel-perfect continuity.
+   - **Top Spacing**: `pt-28 sm:pt-36 lg:pt-40` perfectly matching the vertical spacing cadence of other major sections.
+
+> [!NOTE]
+> **Process Section Archived**: The 4-step process cards component is preserved at [`src/components/how-it-works.tsx`](file:///Users/zephyrus/Downloads/Task%20Venturers/src/components/how-it-works.tsx) and [`src/components/process-steps.tsx`](file:///Users/zephyrus/Downloads/Task%20Venturers/src/components/process-steps.tsx), ready to be instantly mounted whenever requested.
   - **8 Exact Dimensions**:
     1. *Dedicated Account Manager*: `Not Included` / `Not Included` / `Sometimes` / **`Always Included`**
     2. *Full-Spectrum Skill Coverage*: `Single Skill Only` / `Fragmented Talent` / `Billed Separately` / **`One Unified Team`**

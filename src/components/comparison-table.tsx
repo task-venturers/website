@@ -65,7 +65,7 @@ export default function ComparisonTable() {
   ];
 
   return (
-    <section className="relative w-full pt-20 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 lg:pb-32 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-28 sm:pt-36 lg:pt-40 pb-12 sm:pb-14 lg:pb-16 bg-[#070707] font-sans overflow-hidden">
       {/* Dynamic Keyframes for Kinetic Typography */}
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
@@ -92,17 +92,17 @@ export default function ComparisonTable() {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         
         {/* ========================================================================= */}
-        {/* SECTION HEADER: CLEAN BOLD STATEMENT + INLINE ICONS + RIGHT CTA BUTTON    */}
+        {/* SECTION HEADER: CLEAN BOLD STATEMENT + RIGHT CTA BUTTON (TOP ALIGNED)     */}
         {/* ========================================================================= */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           {/* Left Column: Bold Statement */}
           <h2 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold text-white leading-[1.38] tracking-tight font-sans text-left max-w-4xl">
-            Tired of Chasing 🏃 Freelancers, Managing ⚙️ <br className="hidden sm:inline" />
-            Platforms, and Paying Agency Prices 💸?
+            Tired of <span className="text-[#EA7A24]">Chasing</span> Freelancers, <span className="text-[#EA7A24]">Managing</span> <br className="hidden sm:inline" />
+            Platforms, and <span className="text-[#EA7A24]">Paying</span> Agency Prices?
           </h2>
 
-          {/* Right Column: CTA Button */}
-          <div className="shrink-0 flex items-center lg:justify-end">
+          {/* Right Column: CTA Button (Top Aligned) */}
+          <div className="shrink-0 flex items-start lg:justify-end lg:pt-1">
             <Link
               href="/app/scheduling-flow"
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#EA7A24] hover:bg-[#f28834] active:scale-[0.98] text-neutral-950 font-bold text-sm sm:text-base transition-all duration-150 shadow-md cursor-pointer select-none"
@@ -122,8 +122,8 @@ export default function ComparisonTable() {
             {/* Table Header */}
             <thead>
               <tr className="border-b border-white/[0.12]">
-                <th className="py-5 px-4 text-xs sm:text-sm font-semibold text-neutral-400 uppercase tracking-wider w-[34%]">
-                  Feature
+                <th className="py-5 px-4 w-[34%]">
+                  <span className="sr-only">Feature</span>
                 </th>
                 <th className="py-5 px-4 text-xs sm:text-sm font-semibold text-neutral-300 text-center w-[16%]">
                   Freelancers

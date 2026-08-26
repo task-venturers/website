@@ -5,9 +5,8 @@ import PartnerMarquee from "@/components/partner-marquee";
 import ServicesBento from "@/components/services-bento";
 import ImpactMetrics from "@/components/impact-metrics";
 import ComparisonTable from "@/components/comparison-table";
-import HowItWorks from "@/components/how-it-works";
-import Testimonials from "@/components/testimonials";
 import ReasonsToHire from "@/components/reasons-to-hire";
+import Testimonials from "@/components/testimonials";
 
 export default function Home() {
   return (
@@ -33,14 +32,11 @@ export default function Home() {
       {/* Execution, Without Friction: Comparison Table */}
       <ComparisonTable />
 
-      {/* 4-Step Process: How It Works */}
-      <HowItWorks />
+      {/* 26 Reasons to Hire a Virtual Assistant Section (Brochure) */}
+      <ReasonsToHire />
 
       {/* Testimonials & Social Proof Wall Section */}
       <Testimonials />
-
-      {/* 26 Reasons to Hire a Virtual Assistant Section (Brochure) */}
-      <ReasonsToHire />
     </main>
   );
 }

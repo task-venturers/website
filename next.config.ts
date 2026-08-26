@@ -12,19 +12,37 @@ const nextConfig: NextConfig = {
   async rewrites() {
     const schedulerUrl =
       process.env.SCHEDULER_APP_URL ||
-      "https://taskventurers-scheduler.vercel.app";
+      (process.env.NODE_ENV === "development"
+        ? "http://localhost:3001"
+        : "https://taskventurers-scheduler.vercel.app");
     return [
       {
-        source: "/app/scheduling-flow/:path*",
-        destination: `${schedulerUrl}/app/scheduling-flow/:path*`,
+        source: "/app",
+        destination: `${schedulerUrl}/app`,
+      },
+      {
+        source: "/app/:path*",
+        destination: `${schedulerUrl}/app/:path*`,
+      },
+      {
+        source: "/book",
+        destination: `${schedulerUrl}/book`,
       },
       {
         source: "/book/:path*",
         destination: `${schedulerUrl}/book/:path*`,
       },
       {
+        source: "/auth/:path*",
+        destination: `${schedulerUrl}/auth/:path*`,
+      },
+      {
         source: "/api/calendar/:path*",
         destination: `${schedulerUrl}/api/calendar/:path*`,
+      },
+      {
+        source: "/api/auth/:path*",
+        destination: `${schedulerUrl}/api/auth/:path*`,
       },
     ];
   },
