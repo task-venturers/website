@@ -41,7 +41,7 @@ export default function GeneralCTA() {
   ];
 
   return (
-    <section className="relative w-full pt-0 sm:pt-2 lg:pt-4 pb-20 sm:pb-28 lg:pb-32 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-12 sm:pt-16 lg:pt-20 pb-20 sm:pb-28 lg:pb-32 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
@@ -67,7 +67,7 @@ export default function GeneralCTA() {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         
         {/* Main Content Card Container with Centered Layout & Symmetrical Padding */}
-        <div className="relative w-full rounded-3xl sm:rounded-[36px] bg-[#0c0d12]/95 border border-white/[0.08] backdrop-blur-2xl pt-14 sm:pt-16 md:pt-20 lg:pt-24 px-8 sm:px-12 md:px-16 lg:px-20 pb-0 overflow-hidden flex flex-col items-center text-center">
+        <div className="relative w-full rounded-3xl sm:rounded-[36px] bg-[#0c0d12]/95 border border-white/[0.08] backdrop-blur-2xl pt-14 sm:pt-16 md:pt-20 lg:pt-24 px-6 sm:px-10 md:px-14 lg:px-16 pb-0 overflow-hidden flex flex-col items-center text-center">
           
           {/* ========================================================================= */}
           {/* ATMOSPHERIC WARM ORANGE GLOW (CENTERED AT TOP)                            */}
@@ -167,11 +167,14 @@ export default function GeneralCTA() {
             </Link>
           </div>
 
+          {/* Top Line Above Ticker */}
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent relative z-10" />
+
           {/* ========================================================================= */}
-          {/* BOTTOM CONTINUOUS KINETIC MARQUEE TICKER TAPE (EXACT REPLICA OF EBOOK)    */}
+          {/* BOTTOM CONTINUOUS KINETIC MARQUEE TICKER TAPE                             */}
           {/* ========================================================================= */}
           <div
-            className="w-full py-4 sm:py-5 overflow-hidden relative select-none z-10 border-t border-white/[0.08] bg-black/40 backdrop-blur-md -mx-8 sm:-mx-12 md:-mx-16 lg:-mx-20 px-0"
+            className="w-full py-4 sm:py-5 overflow-hidden relative select-none z-10"
             style={{
               maskImage:
                 "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",

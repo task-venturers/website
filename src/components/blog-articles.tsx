@@ -133,7 +133,7 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
   };
 
   return (
-    <section className="relative w-full pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 lg:pb-24 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
