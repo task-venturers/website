@@ -105,17 +105,23 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
     ...Array.from(new Set(posts.map((p) => p.category).filter(Boolean))),
   ];
 
-  // Filter posts (ensure 6 posts displayed per category, using fallback padding if needed)
+  // Filter posts for active category
   const filteredPosts =
     activeCategory === "All"
       ? posts
       : posts.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase());
 
-  // Pad to 6 if needed for symmetry
-  const displayPosts =
-    filteredPosts.length >= 6
-      ? filteredPosts.slice(0, 6)
-      : [...filteredPosts, ...posts].slice(0, 6);
+  // Pad to 6 if needed for symmetry without duplicate keys
+  const displayPosts: BlogPost[] = [...filteredPosts];
+  if (displayPosts.length < 6) {
+    for (const p of posts) {
+      if (displayPosts.length >= 6) break;
+      if (!displayPosts.some((existing) => existing.id === p.id)) {
+        displayPosts.push(p);
+      }
+    }
+  }
+  const finalPosts = displayPosts.slice(0, 6);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -298,7 +304,7 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
               }}
             />
 
-            {displayPosts.map((post, index) => {
+            {finalPosts.map((post, index) => {
               const isFeatured = index === 0;
               const colIndex = index % 3; // 0: Left, 1: Middle, 2: Right
 
@@ -312,7 +318,7 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
 
               return (
                 <Link
-                  key={post.id}
+                  key={`${post.id}-${index}`}
                   href={`#${post.slug}`}
                   className={`group flex flex-col ${colPaddingClass} cursor-pointer`}
                 >
