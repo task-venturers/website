@@ -155,14 +155,33 @@ The landing page renders sections in this order:
 6. `<ImpactMetrics />` (Ultra-slim numbers strip)
 7. `<ComparisonTable />` (Execution, Without Friction comparison table)
 8. `<ReasonsToHire />` (26 Reasons brochure CTA card):
-   - **Clean Marquee Phrases**: Removed trailing periods from all phrases (`DELEGATE SMARTER`, `SCALE FASTER`, `BACKED BY AN EXPERIENCED TEAM`) for clean typography between orange asterisks.
+   - **No Outer Card Shadow**: Removed outer drop shadows (`shadow-none`), keeping a clean, crisp glass border (`border-white/[0.08]`) flush against the dark canvas.
    - **Symmetrical Marquee Mask Fade**: Moved mask gradient onto the outer `w-full` container div (`linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)`), guaranteeing both the left and right edges inside the card frame fade gracefully into view.
-   - **Contained Card Shadow**: Replaced `shadow-[0_24px_80px_rgba(0,0,0,0.7)]` with `shadow-2xl shadow-black/40` so the card shadow is cleanly contained within the card bounds and no longer projects a dark clipping block over the bottom section boundary.
    - **Unified Card Background**: Marquee ticker strip background made seamlessly transparent so the dark card tone and corner radiuses are 100% unified without color shifts in the corners.
 9. `<Testimonials />` (Social proof masonry wall):
    - **Header**: Updated to Title Case: *Don't Take* <span className="text-[#EA7A24]">**Our Word for It**</span> with social proof avatar pill stack.
    - **Unified Section Background**: Configured with identical `#070707` dark background and calibrated film grain filter matching `<ComparisonTable />` and `<ServicesBento />` with 100% pixel-perfect continuity.
    - **Top Spacing**: `pt-28 sm:pt-36 lg:pt-40` perfectly matching the vertical spacing cadence of other major sections.
+10. `<BlogArticles />` (6-Blog Grid with Aligned Category Bar Notion CMS Blog Section)
+11. `<GeneralCTA />` (Centered Text & Button General CTA Section - Rendered after Blog Space):
+   - **Centered Layout**: Centered headline (**26 Reasons to Hire a Virtual Assistant from Task Venturers**), centered subtitle description, and centered **Request the Brochure ↗** brand orange action button.
+   - **Image Removed**: Removed the 3D brochure graphic mockup per directive for a clean, focused general CTA layout.
+   - **Ticker Fade Mask & Asterisk Spacing**: Configured left/right side fading gradient mask (`maskImage: linear-gradient(...)`) (`media_1787855755748.png`) matching `<ReasonsToHire />`, with equal item padding (`px-6 sm:px-8`) preventing text overlap with the 8-point orange asterisk.
+   - **Reduced Section Gap**: Reduced vertical gap between `<BlogArticles />` (`pb-6 sm:pb-8 lg:pb-10`) and `<GeneralCTA />` (`pt-0 sm:pt-2 lg:pt-4`) (`media_1787855814093.png`) for a tight, cohesive layout.
+   - **Title & Subtitle**: **The** <span className="text-[#EA7A24]">**Blog Space**</span> with orange highlight on **Blog Space** and subtitle description on the left.
+   - **Top-Aligned Subscription Pill**: Positioned email pill top-aligned with the header title (`media_1787850276098.png`).
+   - **Email Input Placeholder**: Upgraded to crisp, rich `font-medium text-sm sm:text-base placeholder-neutral-400`.
+   - **Embedded B&W Avatars Button**: Orange pill button featuring **3 black & white circular avatars** and text **Join 1,200+ Readers**.
+   - **Orange Focus Glow Border**: Clicking/focusing the email input container activates a crisp `#EA7A24` orange border with ambient orange glow shadow.
+   - **Increased Divider Bottom Margin (Screen 1)**: Expanded spacing after the inter-section fading divider line (`mb-20 sm:mb-24 lg:mb-28`) (`media_1787854783384.png`) to match top spacing cadence.
+   - **Tighter Category Bar Gap (Screen 2)**: Reduced bottom margin of category pill row (`mb-4 sm:mb-6`) (`media_1787854815146.png`) for a tighter, cleaner connection to the card grid.
+   - **Swapped Button Colors (Screen 3)**:
+     - **Subscription Button**: Swapped to solid white (`bg-white text-neutral-950 font-bold hover:bg-neutral-100`) (`media_1787854834058.png`).
+     - **"To The Blog Space ↗" Button**: Swapped to brand orange (`bg-[#EA7A24] text-neutral-950 font-bold hover:bg-[#f28834]`) (`media_1787854834058.png`).
+   - **Increased Horizontal & Vertical Card Spacing**: Expanded vertical card padding to `py-8 sm:py-10 lg:py-14` and increased inner column gaps to `lg:pr-10 xl:pr-14` / `lg:pl-10 xl:pl-14` / `lg:px-7 xl:px-10` (`media_1787854985196.jpg`), giving the cards generous, breathable space while keeping outer edges flush with section boundaries.
+   - **Interior Grid Dividers Only**: Clean 3x2 grid with interior vertical fading lines and middle horizontal fading line (outer top/bottom dividers removed).
+   - **Date & Category Image Overlay**: Bottom frosted glass image overlay displaying **Date** on the left and **Category** on the right with Author removed.
+   - **Live Notion Database Integration**: 100% dynamically connected to your Notion `All Blogs` database (`NOTION_DATABASE_ID="3c9133fa-dd47-80b9-8386-000bfd29cc6b"`).
 
 > [!NOTE]
 > **Process Section Archived**: The 4-step process cards component is preserved at [`src/components/how-it-works.tsx`](file:///Users/zephyrus/Downloads/Task%20Venturers/src/components/how-it-works.tsx) and [`src/components/process-steps.tsx`](file:///Users/zephyrus/Downloads/Task%20Venturers/src/components/process-steps.tsx), ready to be instantly mounted whenever requested.

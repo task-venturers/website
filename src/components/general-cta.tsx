@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 // Signature Brand 8-Point Asterisk Icon
@@ -27,7 +26,7 @@ function BrandAsterisk() {
   );
 }
 
-export default function ReasonsToHire() {
+export default function GeneralCTA() {
   // Marquee phrase repeated across the continuous loop track
   const marqueePhrases = [
     "DELEGATE SMARTER",
@@ -42,14 +41,14 @@ export default function ReasonsToHire() {
   ];
 
   return (
-    <section className="relative w-full pt-0 pb-6 sm:pb-8 lg:pb-10 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-0 sm:pt-2 lg:pt-4 pb-20 sm:pb-28 lg:pb-32 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
           className="absolute inset-0 w-full h-full opacity-[0.16] mix-blend-overlay"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <filter id="reasonsNoiseFilter">
+          <filter id="generalCtaNoiseFilter">
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.75"
@@ -61,22 +60,22 @@ export default function ReasonsToHire() {
               values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0"
             />
           </filter>
-          <rect width="100%" height="100%" filter="url(#reasonsNoiseFilter)" />
+          <rect width="100%" height="100%" filter="url(#generalCtaNoiseFilter)" />
         </svg>
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         
-        {/* Main Content Card Container with Full Width & Balanced Symmetrical Vertical Padding */}
-        <div className="relative w-full rounded-3xl sm:rounded-[36px] bg-[#0c0d12]/95 border border-white/[0.08] backdrop-blur-2xl pt-10 sm:pt-12 md:pt-14 lg:pt-14 px-8 sm:px-12 md:px-14 lg:px-16 pb-0 overflow-hidden flex flex-col">
+        {/* Main Content Card Container with Centered Layout & Symmetrical Padding */}
+        <div className="relative w-full rounded-3xl sm:rounded-[36px] bg-[#0c0d12]/95 border border-white/[0.08] backdrop-blur-2xl pt-14 sm:pt-16 md:pt-20 lg:pt-24 px-8 sm:px-12 md:px-16 lg:px-20 pb-0 overflow-hidden flex flex-col items-center text-center">
           
           {/* ========================================================================= */}
-          {/* ATMOSPHERIC WARM ORANGE GLOW                                              */}
+          {/* ATMOSPHERIC WARM ORANGE GLOW (CENTERED AT TOP)                            */}
           {/* ========================================================================= */}
           <div className="pointer-events-none absolute inset-0 select-none overflow-hidden z-0" aria-hidden="true">
             {/* Center-Top Atmospheric Radial Orange Glow */}
             <div
-              className="absolute -top-32 left-1/3 -translate-x-1/2 w-[700px] sm:w-[950px] h-[420px] rounded-full blur-[130px] opacity-25"
+              className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] sm:w-[950px] h-[420px] rounded-full blur-[130px] opacity-25"
               style={{
                 background: "radial-gradient(circle, #EA7A24 0%, rgba(234, 122, 36, 0.35) 45%, transparent 70%)",
               }}
@@ -84,7 +83,7 @@ export default function ReasonsToHire() {
 
             {/* Bottom Subtle Ambient Warmth */}
             <div
-              className="absolute -bottom-24 right-1/4 w-[550px] h-[280px] rounded-full blur-[110px] opacity-20"
+              className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[600px] h-[280px] rounded-full blur-[110px] opacity-20"
               style={{
                 background: "radial-gradient(circle, #EA7A24 0%, transparent 70%)",
               }}
@@ -92,26 +91,22 @@ export default function ReasonsToHire() {
           </div>
 
           {/* ========================================================================= */}
-          {/* VERY SUBTLE ORANGE GRAPH / GRID BACKGROUND (FADING FROM ALL SIDES)        */}
+          {/* VERY SUBTLE ORANGE GRAPH / GRID BACKGROUND                                 */}
           {/* ========================================================================= */}
           <div
             className="pointer-events-none absolute inset-0 select-none overflow-hidden z-0"
             style={{
               maskImage:
-                "radial-gradient(ellipse 65% 55% at 50% 45%, black 15%, transparent 75%)",
+                "linear-gradient(to bottom, black 0%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
               WebkitMaskImage:
-                "radial-gradient(ellipse 65% 55% at 50% 45%, black 15%, transparent 75%)",
+                "linear-gradient(to bottom, black 0%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
             }}
             aria-hidden="true"
           >
-            <svg
-              className="w-full h-full opacity-[0.14]"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg className="w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                {/* 10px Sub-grid lines */}
                 <pattern
-                  id="reasonsGridSmall"
+                  id="generalCtaGridSmall"
                   width="10"
                   height="10"
                   patternUnits="userSpaceOnUse"
@@ -121,17 +116,16 @@ export default function ReasonsToHire() {
                     fill="none"
                     stroke="#EA7A24"
                     strokeWidth="0.5"
-                    strokeOpacity="0.35"
+                    strokeOpacity="0.6"
                   />
                 </pattern>
-                {/* 40px Primary grid lines */}
                 <pattern
-                  id="reasonsGridPattern"
+                  id="generalCtaGridPattern"
                   width="40"
                   height="40"
                   patternUnits="userSpaceOnUse"
                 >
-                  <rect width="40" height="40" fill="url(#reasonsGridSmall)" />
+                  <rect width="40" height="40" fill="url(#generalCtaGridSmall)" />
                   <path
                     d="M 40 0 L 0 0 0 40"
                     fill="none"
@@ -141,73 +135,43 @@ export default function ReasonsToHire() {
                   />
                 </pattern>
               </defs>
-              <rect width="100%" height="100%" fill="url(#reasonsGridPattern)" />
+              <rect width="100%" height="100%" fill="url(#generalCtaGridPattern)" />
             </svg>
           </div>
 
           {/* Top Border Subtle Highlight */}
           <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-[#EA7A24]/40 to-transparent pointer-events-none" />
 
-          {/* 2-Column Responsive Grid Layout */}
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full mb-10 sm:mb-12 md:mb-14 lg:mb-14">
+          {/* ========================================================================= */}
+          {/* CENTERED TEXT CONTENT & CTA BUTTON (NO IMAGE)                             */}
+          {/* ========================================================================= */}
+          <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto mb-14 sm:mb-16 lg:mb-20">
             
-            {/* Left Column: Left-aligned Text, Heading & CTA Button */}
-            <div className="lg:col-span-6 flex flex-col items-start text-left pr-0 lg:pr-2">
+            {/* Heading */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-white tracking-tight leading-[1.16] text-center mb-4 sm:mb-5">
+              <span className="text-[#EA7A24]">26 Reasons</span> to Hire a Virtual Assistant from Task Venturers
+            </h2>
 
-              {/* Heading (Exact same H2 size & weight as all other landing page H2s) */}
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-white tracking-tight leading-[1.16] text-left mb-3 sm:mb-4 max-w-xl">
-                <span className="text-[#EA7A24]">26 Reasons</span> to Hire a{" "}
-                <br className="hidden lg:block" />
-                Virtual Assistant from{" "}
-                <br className="hidden lg:block" />
-                Task Venturers
-              </h2>
+            {/* Paragraph */}
+            <p className="text-base sm:text-lg text-neutral-300 leading-relaxed font-normal max-w-2xl text-center mb-8 sm:mb-9">
+              Task Venturers virtual assistants handle 26 business-critical tasks so founders and teams can focus on growth. Get the full capability list delivered straight to your inbox.
+            </p>
 
-              {/* Paragraph */}
-              <p className="text-base sm:text-[17px] text-neutral-300 leading-relaxed font-normal max-w-lg text-left mb-6 sm:mb-7">
-                Task Venturers virtual assistants handle 26 business-critical tasks so founders and teams can focus on growth. Get the full capability list delivered straight to your inbox.
-              </p>
-
-              {/* CTA Action Button (Matching Hero Get Started Button) */}
-              <Link
-                href="/reasons"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-[#EA7A24] hover:bg-[#f28834] active:scale-[0.98] text-neutral-950 font-bold text-sm sm:text-base transition-all duration-150 shadow-md cursor-pointer select-none"
-              >
-                <span>Request the Brochure</span>
-                <ArrowUpRight className="w-4 h-4 stroke-[2.6]" />
-              </Link>
-            </div>
-
-            {/* Right Column: 3D Task Venturers Brochure Mockup (Enlarged) */}
-            <div className="lg:col-span-6 flex items-center justify-center lg:justify-end">
-              <div className="relative w-full max-w-[420px] sm:max-w-[520px] lg:max-w-[620px] xl:max-w-[660px] flex items-center justify-center">
-                {/* Soft ambient back-glow for the graphic */}
-                <div
-                  className="absolute inset-0 rounded-full blur-[70px] opacity-30 pointer-events-none"
-                  style={{
-                    background: "radial-gradient(circle, #EA7A24 0%, transparent 70%)",
-                  }}
-                />
-                <Image
-                  src="/images/task-venturers-brochure.png"
-                  alt="Task Venturers 26 Reasons to Hire Us Brochure"
-                  width={1024}
-                  height={682}
-                  className="w-full h-auto object-contain relative z-10 drop-shadow-[0_24px_50px_rgba(0,0,0,0.65)]"
-                  priority
-                  unoptimized
-                />
-              </div>
-            </div>
-
+            {/* CTA Action Button */}
+            <Link
+              href="/reasons"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 sm:px-9 sm:py-4.5 rounded-full bg-[#EA7A24] hover:bg-[#f28834] active:scale-[0.98] text-neutral-950 font-bold text-base transition-all duration-150 shadow-md cursor-pointer select-none"
+            >
+              <span>Request the Brochure</span>
+              <ArrowUpRight className="w-4 h-4 stroke-[2.6]" />
+            </Link>
           </div>
 
-          {/* Top Line Above Ticker */}
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent relative z-10" />
-
-          {/* Bottom Continuous Scrolling Marquee Strip */}
+          {/* ========================================================================= */}
+          {/* BOTTOM CONTINUOUS KINETIC MARQUEE TICKER TAPE (EXACT REPLICA OF EBOOK)    */}
+          {/* ========================================================================= */}
           <div
-            className="w-full py-4 sm:py-5 overflow-hidden relative select-none z-10"
+            className="w-full py-4 sm:py-5 overflow-hidden relative select-none z-10 border-t border-white/[0.08] bg-black/40 backdrop-blur-md -mx-8 sm:-mx-12 md:-mx-16 lg:-mx-20 px-0"
             style={{
               maskImage:
                 "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
@@ -220,7 +184,7 @@ export default function ReasonsToHire() {
               <div className="animate-marquee flex items-center shrink-0">
                 {marqueePhrases.map((phrase, idx) => (
                   <div key={`phrase-1-${idx}`} className="flex items-center shrink-0 px-6 sm:px-8">
-                    <span className="text-xs sm:text-sm font-extrabold tracking-widest text-neutral-300 uppercase whitespace-nowrap select-none">
+                    <span className="text-xs sm:text-sm font-extrabold tracking-widest text-neutral-300 uppercase whitespace-nowrap select-none font-sans">
                       {phrase}
                     </span>
                     <BrandAsterisk />
@@ -232,7 +196,7 @@ export default function ReasonsToHire() {
               <div className="animate-marquee flex items-center shrink-0" aria-hidden="true">
                 {marqueePhrases.map((phrase, idx) => (
                   <div key={`phrase-2-${idx}`} className="flex items-center shrink-0 px-6 sm:px-8">
-                    <span className="text-xs sm:text-sm font-extrabold tracking-widest text-neutral-300 uppercase whitespace-nowrap select-none">
+                    <span className="text-xs sm:text-sm font-extrabold tracking-widest text-neutral-300 uppercase whitespace-nowrap select-none font-sans">
                       {phrase}
                     </span>
                     <BrandAsterisk />
