@@ -12,9 +12,12 @@ export interface BlogPost {
   status: string;
 }
 
-const notionKey = process.env.NOTION_API_KEY;
-const dbId = process.env.NOTION_DATABASE_ID;
-const catDbId = process.env.NOTION_CATEGORIES_DATABASE_ID;
+const notionKey =
+  process.env.NOTION_API_KEY || "ntn_H5167045959a4i5FIICyi0APzuNMf0JPAQSQxkvEXs5goT";
+const dbId =
+  process.env.NOTION_DATABASE_ID || "3c9133fa-dd47-80b9-8386-000bfd29cc6b";
+const catDbId =
+  process.env.NOTION_CATEGORIES_DATABASE_ID || "3c9133fa-dd47-8036-89ff-000bb3e968b4";
 
 export const notion = notionKey ? new Client({ auth: notionKey }) : null;
 
