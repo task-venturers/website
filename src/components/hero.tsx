@@ -120,7 +120,7 @@ export default function Hero() {
                 <span className="font-black text-xs sm:text-sm tracking-tight leading-none">150</span>
                 <span className="font-extrabold text-[11px] sm:text-xs ml-0.5 leading-none select-none opacity-95">+</span>
               </span>
-              <span className="text-white">experts worldwide.</span>
+              <span>experts worldwide.</span>
             </div>
           </div>
 

@@ -56,7 +56,7 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative w-full pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-28 lg:pb-32 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-20 sm:pt-24 lg:pt-28 pb-28 sm:pb-36 lg:pb-44 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div
         className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"

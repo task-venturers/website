@@ -201,7 +201,7 @@ export default function BlogArticles({
             </h2>
 
             {/* Subtitle description */}
-            <p className="text-neutral-400 text-base sm:text-lg leading-relaxed font-normal max-w-xl">
+            <p className="text-base sm:text-lg text-neutral-300 font-normal leading-relaxed max-w-xl">
               New product features, the latest in technology, solutions, and updates.
             </p>
           </div>

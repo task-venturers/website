@@ -61,7 +61,7 @@ export default function Footer() {
         {/* ========================================================================= */}
         {/* TOP BANNER STRIP: HIGH-IMPACT STATEMENT + SINGLE CTA BUTTON               */}
         {/* ========================================================================= */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-12 sm:pb-16 border-b border-white/10">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-10 sm:pb-12">
           
           {/* Left Headline */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-white tracking-tight leading-[1.2] max-w-3xl font-sans">
@@ -82,15 +82,26 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Top Horizontal Fading Divider Line (Fades from both ends) */}
+        <div
+          className="w-full h-[1px] bg-white/15 my-6 sm:my-8"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+          }}
+        />
+
         {/* ========================================================================= */}
-        {/* MAIN FOOTER NAVIGATION GRID                                               */}
+        {/* MAIN FOOTER NAVIGATION GRID WITH PERFECTLY BALANCED VERTICAL DIVIDERS      */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 pt-14 sm:pt-16 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0 pt-10 sm:pt-14 pb-14 sm:pb-16 items-stretch">
           
           {/* ----------------------------------------------------------------------- */}
-          {/* COLUMN 1: LOGO, BRAND VALUE PARAGRAPH, AND TRUE PROTECTED EMAIL           */}
+          {/* COLUMN 1: LOGO, BRAND VALUE PARAGRAPH, AND PROTECTED EMAIL               */}
           {/* ----------------------------------------------------------------------- */}
-          <div className="lg:col-span-5 space-y-5">
+          <div className="lg:col-span-5 lg:pr-10 xl:pr-14 space-y-5">
             {/* Header Navbar Brand Logo Replica */}
             <Link
               href="/"
@@ -137,14 +148,20 @@ export default function Footer() {
           </div>
 
           {/* ----------------------------------------------------------------------- */}
-          {/* COLUMN 2: EMPTY SPACER COLUMN FOR BALANCED RESPONSIVE GRID              */}
+          {/* COLUMN 2: RESOURCES (WITH SYMMETRIC BALANCED FADING VERTICAL DIVIDERS)   */}
           {/* ----------------------------------------------------------------------- */}
-          <div className="hidden lg:block lg:col-span-1"></div>
+          <div className="lg:col-span-4 lg:px-10 xl:px-14 space-y-5 relative">
+            {/* Left Vertical Fading Divider Line (Centered between Col 1 and Resources) */}
+            <div
+              className="hidden lg:block absolute left-0 top-0 bottom-0 w-[1px] bg-white/15 pointer-events-none"
+              style={{
+                maskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+              }}
+            />
 
-          {/* ----------------------------------------------------------------------- */}
-          {/* COLUMN 3: RESOURCES                                                     */}
-          {/* ----------------------------------------------------------------------- */}
-          <div className="lg:col-span-3 space-y-5">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#EA7A24] mb-4">
               Resources
             </h3>
@@ -175,12 +192,23 @@ export default function Footer() {
                 Get matched with a dedicated assistant in 24h
               </p>
             </Link>
+
+            {/* Right Vertical Fading Divider Line (Centered between Resources and Socials) */}
+            <div
+              className="hidden lg:block absolute right-0 top-0 bottom-0 w-[1px] bg-white/15 pointer-events-none"
+              style={{
+                maskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+              }}
+            />
           </div>
 
           {/* ----------------------------------------------------------------------- */}
-          {/* COLUMN 4: SOCIALS                                                      */}
+          {/* COLUMN 3: SOCIALS                                                      */}
           {/* ----------------------------------------------------------------------- */}
-          <div className="lg:col-span-3 space-y-5">
+          <div className="lg:col-span-3 lg:pl-10 xl:pl-14 space-y-5">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#EA7A24] mb-4">
               Socials
             </h3>
@@ -233,10 +261,21 @@ export default function Footer() {
 
         </div>
 
+        {/* Bottom Horizontal Fading Divider Line (Fades from both ends) */}
+        <div
+          className="w-full h-[1px] bg-white/15 mb-8"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+          }}
+        />
+
         {/* ========================================================================= */}
         {/* BOTTOM COPYRIGHT & LEGAL BAR                                              */}
         {/* ========================================================================= */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <div>
             © {new Date().getFullYear()} Task Venturers. All rights reserved.
           </div>
