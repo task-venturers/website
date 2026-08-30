@@ -41,7 +41,7 @@ export default function GeneralCTA() {
   ];
 
   return (
-    <section className="relative w-full pt-12 sm:pt-16 lg:pt-20 pb-20 sm:pb-28 lg:pb-32 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-8 sm:pt-12 lg:pt-14 pb-20 sm:pb-24 lg:pb-28 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg

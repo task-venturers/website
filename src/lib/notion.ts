@@ -6,6 +6,7 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   category: string;
+  categories: string[];
   readTime: string;
   publishedAt: string;
   featuredImage: string;
@@ -21,11 +22,8 @@ const catDbId =
 
 export const notion = notionKey ? new Client({ auth: notionKey }) : null;
 
-// Cache categories map for fast lookup
-let categoryMapCache: Record<string, string> | null = null;
-
+// Fetch categories map freshly for real-time Notion updates
 export async function getCategoryMap(): Promise<Record<string, string>> {
-  if (categoryMapCache) return categoryMapCache;
   if (!notion || !catDbId) return {};
 
   try {
@@ -44,12 +42,18 @@ export async function getCategoryMap(): Promise<Record<string, string>> {
         }
       }
     }
-    categoryMapCache = map;
     return map;
   } catch (err) {
     console.error("Error fetching Notion categories:", err);
     return {};
   }
+}
+
+// Fetch all available category names from Notion
+export async function getNotionCategories(): Promise<string[]> {
+  const categoryMap = await getCategoryMap();
+  const names = Object.values(categoryMap).filter(Boolean);
+  return Array.from(new Set(names));
 }
 
 export async function getLatestBlogPosts(): Promise<BlogPost[]> {
@@ -63,52 +67,58 @@ export async function getLatestBlogPosts(): Promise<BlogPost[]> {
       data_source_id: dbId,
     });
 
-    const posts: BlogPost[] = response.results.map((page: any) => {
-      const props = page.properties || {};
+    const posts: BlogPost[] = response.results
+      .map((page: any) => {
+        const props = page.properties || {};
 
-      const title = props.Title?.title?.[0]?.plain_text || "Untitled Post";
-      const slug =
-        props.Slug?.rich_text?.[0]?.plain_text ||
-        title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      const excerpt =
-        props["Meta Description"]?.rich_text?.[0]?.plain_text ||
-        "Read the latest insights and strategies from the Task Venturers team.";
-      const status = props.Status?.status?.name || "Published";
-      const publishedAt = props.Date?.date?.start
-        ? new Date(props.Date.date.start).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })
-        : "Nov 26, 2025";
+        const title = props.Title?.title?.[0]?.plain_text || "Untitled Post";
+        const slug =
+          props.Slug?.rich_text?.[0]?.plain_text ||
+          title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        const excerpt =
+          props["Meta Description"]?.rich_text?.[0]?.plain_text ||
+          "Read the latest insights and strategies from the Task Venturers team.";
+        const status = props.Status?.status?.name || "Draft";
+        const publishedAt = props.Date?.date?.start
+          ? new Date(props.Date.date.start).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })
+          : "Nov 26, 2025";
 
-      // Resolve category name from relation or fallback
-      let category = "Web Design";
-      const categoryRelations = props.Category?.relation || [];
-      if (categoryRelations.length > 0 && categoryMap[categoryRelations[0].id]) {
-        category = categoryMap[categoryRelations[0].id];
-      }
+        // Resolve all category names from relation
+        const categoryRelations = props.Category?.relation || [];
+        const categories: string[] = categoryRelations
+          .map((rel: any) => categoryMap[rel.id])
+          .filter(Boolean);
 
-      // Featured image (Cover image or file/external property)
-      let featuredImage =
-        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80";
-      if (page.cover) {
-        if (page.cover.type === "external") featuredImage = page.cover.external.url;
-        else if (page.cover.type === "file") featuredImage = page.cover.file.url;
-      }
+        const primaryCategory =
+          categories.length > 0 ? categories[0] : "General";
 
-      return {
-        id: page.id,
-        slug,
-        title,
-        excerpt,
-        category,
-        readTime: "5 min read",
-        publishedAt,
-        featuredImage,
-        status,
-      };
-    });
+        // Featured image (Cover image or file/external property)
+        let featuredImage =
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80";
+        if (page.cover) {
+          if (page.cover.type === "external") featuredImage = page.cover.external.url;
+          else if (page.cover.type === "file") featuredImage = page.cover.file.url;
+        }
+
+        return {
+          id: page.id,
+          slug,
+          title,
+          excerpt,
+          category: primaryCategory,
+          categories: categories.length > 0 ? categories : [primaryCategory],
+          readTime: "5 min read",
+          publishedAt,
+          featuredImage,
+          status,
+        };
+      })
+      // Strictly ONLY show posts with status === 'Published'
+      .filter((post: BlogPost) => post.status.toLowerCase() === "published");
 
     // Return posts
     return posts.length > 0 ? posts : getMockBlogPosts();
@@ -126,24 +136,26 @@ export function getMockBlogPosts(): BlogPost[] {
       title: "Create Website Designs That Feel Easy to Use",
       excerpt:
         "Simple website layouts help users browse pages comfortably and find information much faster.",
-      category: "Web Design",
+      category: "Operations",
+      categories: ["Operations"],
       readTime: "5 min read",
-      publishedAt: "Nov 26, 2025",
+      publishedAt: "26 Nov 2025",
       featuredImage:
-        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80",
       status: "Published",
     },
     {
       id: "2",
-      slug: "make-clean-graphics-that-look-professional-always",
-      title: "Make Clean Graphics That Look Professional Always",
+      slug: "build-fast-landing-pages-for-modern-brands",
+      title: "Build Fast Landing Pages for Modern Brands",
       excerpt:
-        "Clean shapes and soft colors help your graphics look neat, modern, and visually appealing.",
-      category: "GFX Design",
-      readTime: "5 min read",
-      publishedAt: "Nov 26, 2025",
+        "Clean structure and clear messaging improve user engagement and strengthen your brand presence.",
+      category: "Operations",
+      categories: ["Operations"],
+      readTime: "4 min read",
+      publishedAt: "26 Nov 2025",
       featuredImage:
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop&q=80",
       status: "Published",
     },
     {
@@ -152,7 +164,8 @@ export function getMockBlogPosts(): BlogPost[] {
       title: "Building Brand Identities That Stand Out in 2026",
       excerpt:
         "A consistent brand identity strengthens trust and drives recognition across all digital touchpoints.",
-      category: "Brand Identity",
+      category: "Technology",
+      categories: ["Technology"],
       readTime: "6 min read",
       publishedAt: "Dec 10, 2025",
       featuredImage:
@@ -165,7 +178,8 @@ export function getMockBlogPosts(): BlogPost[] {
       title: "Mastering UI/UX Design for Modern Web Applications",
       excerpt:
         "Streamlining complex workflows with intuitive interface micro-interactions and bold typography.",
-      category: "UI/UX Design",
+      category: "SEO",
+      categories: ["SEO"],
       readTime: "4 min read",
       publishedAt: "Jan 14, 2026",
       featuredImage:

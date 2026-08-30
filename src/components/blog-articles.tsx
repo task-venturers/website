@@ -7,9 +7,13 @@ import type { BlogPost } from "@/lib/notion";
 
 interface BlogArticlesProps {
   initialPosts?: BlogPost[];
+  initialCategories?: string[];
 }
 
-export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
+export default function BlogArticles({
+  initialPosts = [],
+  initialCategories = [],
+}: BlogArticlesProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [email, setEmail] = useState<string>("");
   const [subscribed, setSubscribed] = useState<boolean>(false);
@@ -25,7 +29,8 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
             title: "UX review presentations",
             excerpt:
               "How do you create compelling presentations that wow your colleagues and impress your managers? Look no further.",
-            category: "Design",
+            category: "Operations",
+            categories: ["Operations"],
             readTime: "5 min read",
             publishedAt: "20 Jan 2022",
             featuredImage:
@@ -38,7 +43,8 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
             title: "Best books on scaling your startup",
             excerpt:
               "This collection of the best startup books for scaling your startup are packed full with valuable insights and advice.",
-            category: "Product",
+            category: "Operations",
+            categories: ["Operations"],
             readTime: "4 min read",
             publishedAt: "19 Jan 2022",
             featuredImage:
@@ -51,7 +57,8 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
             title: "Building scalable web applications in Next.js",
             excerpt:
               "Learn architectural patterns for high-performance React and Next.js applications with zero technical debt.",
-            category: "Development",
+            category: "Technology",
+            categories: ["Technology"],
             readTime: "6 min read",
             publishedAt: "15 Jan 2022",
             featuredImage:
@@ -64,7 +71,8 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
             title: "Leadership lessons for growing B2B teams",
             excerpt:
               "Effective delegation strategies to help founders and executive leaders focus on high-impact growth.",
-            category: "Leadership",
+            category: "Operations",
+            categories: ["Operations"],
             readTime: "5 min read",
             publishedAt: "12 Jan 2022",
             featuredImage:
@@ -77,7 +85,8 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
             title: "Mastering UI/UX Design for Modern Applications",
             excerpt:
               "Streamlining complex workflows with intuitive interface micro-interactions and bold typography.",
-            category: "Design",
+            category: "Industries",
+            categories: ["Industries"],
             readTime: "5 min read",
             publishedAt: "10 Jan 2022",
             featuredImage:
@@ -91,6 +100,7 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
             excerpt:
               "Leveraging intelligent workflows and custom AI agents to multiply output without scaling headcount.",
             category: "Automations",
+            categories: ["Automations"],
             readTime: "7 min read",
             publishedAt: "08 Jan 2022",
             featuredImage:
@@ -99,29 +109,38 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
           },
         ];
 
-  // Extract unique categories
-  const categories = [
-    "All",
-    ...Array.from(new Set(posts.map((p) => p.category).filter(Boolean))),
-  ];
+  // Filter categories so empty categories with 0 published posts are NEVER shown
+  const availableCategories =
+    initialCategories.length > 0
+      ? initialCategories
+      : Array.from(
+          new Set(
+            posts
+              .flatMap((p) => p.categories || [p.category])
+              .filter(Boolean)
+          )
+        );
 
-  // Filter posts for active category
-  const filteredPosts =
+  // Only include categories that actually have at least 1 published post
+  const activeCategoriesWithPosts = availableCategories.filter((cat) =>
+    posts.some((p) =>
+      p.categories?.some((c) => c.toLowerCase() === cat.toLowerCase()) ||
+      p.category?.toLowerCase() === cat.toLowerCase()
+    )
+  );
+
+  const categories = ["All", ...activeCategoriesWithPosts];
+
+  // Filter posts strictly for active category without padding unrelated posts
+  const finalPosts =
     activeCategory === "All"
-      ? posts
-      : posts.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase());
-
-  // Pad to 6 if needed for symmetry without duplicate keys
-  const displayPosts: BlogPost[] = [...filteredPosts];
-  if (displayPosts.length < 6) {
-    for (const p of posts) {
-      if (displayPosts.length >= 6) break;
-      if (!displayPosts.some((existing) => existing.id === p.id)) {
-        displayPosts.push(p);
-      }
-    }
-  }
-  const finalPosts = displayPosts.slice(0, 6);
+      ? posts.slice(0, 6)
+      : posts.filter(
+          (p) =>
+            p.categories?.some(
+              (c) => c.toLowerCase() === activeCategory.toLowerCase()
+            ) || p.category?.toLowerCase() === activeCategory.toLowerCase()
+        );
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,7 +152,7 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
   };
 
   return (
-    <section className="relative w-full pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 lg:pb-24 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-0 pb-12 sm:pb-16 lg:pb-20 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
@@ -158,9 +177,9 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 relative z-10">
         
-        {/* Inter-Section Horizontal Fading Divider Line (Between Testimonials & Blog Space) */}
+        {/* Inter-Section Horizontal Fading Divider Line (Symmetrically spaced matching Screen 3 gap) */}
         <div
-          className="w-full h-[1px] bg-white/15 mb-20 sm:mb-24 lg:mb-28"
+          className="w-full h-[1px] bg-white/15 my-28 sm:my-32 lg:my-36"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
@@ -234,7 +253,7 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
         </div>
 
         {/* Category Tabs Pill Bar (Left) + "To The Blog Space" CTA Button (Right - Swapped to Brand Orange) */}
-        <div className="w-full mb-4 sm:mb-6 flex items-center justify-between gap-4 flex-wrap">
+        <div className="w-full mb-10 sm:mb-12 lg:mb-16 flex items-center justify-between gap-4 flex-wrap">
           {/* Left: Pill Category Bar */}
           <div className="inline-flex items-center p-1.5 rounded-full bg-[#0c0d12] border border-white/15 backdrop-blur-xl gap-1 shadow-lg overflow-x-auto no-scrollbar max-w-full">
             {categories.map((cat) => {
@@ -266,104 +285,108 @@ export default function BlogArticles({ initialPosts = [] }: BlogArticlesProps) {
         </div>
 
         {/* ========================================================================= */}
-        {/* 6-BLOG GRID WITH PERFECT OUTER MARGIN ALIGNMENT & INTERIOR DIVIDERS       */}
+        {/* 6-BLOG GRID WITH CONTINUOUS VERTICAL LINES PASSING THROUGH HORIZONTAL LINE */}
         {/* ========================================================================= */}
-        <div className="relative w-full">
-          
-          {/* 3-Column Grid Container */}
-          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
-            
-            {/* Desktop Vertical Fading Divider Lines (Fade at top & bottom ends) */}
-            <div
-              className="hidden lg:block absolute top-0 bottom-0 left-1/3 w-[1px] bg-white/15 pointer-events-none z-10"
-              style={{
-                maskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
-              }}
-            />
-            <div
-              className="hidden lg:block absolute top-0 bottom-0 left-2/3 w-[1px] bg-white/15 pointer-events-none z-10"
-              style={{
-                maskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
-              }}
-            />
+        <div className="relative w-full pt-2">
+          {finalPosts.length === 0 ? (
+            <div className="py-16 text-center">
+              <p className="text-neutral-400 text-lg">No articles found in this category.</p>
+            </div>
+          ) : (
+            <div className="relative">
+              {/* Continuous Desktop Vertical Fading Divider 1 (Top to Bottom through horizontal line) */}
+              {finalPosts.length >= 2 && (
+                <div
+                  className="hidden lg:block absolute top-0 bottom-0 w-[1px] bg-white/15 pointer-events-none z-10 left-[calc(33.333333%_-_10.66px)] xl:left-[calc(33.333333%_-_13.33px)]"
+                  style={{
+                    maskImage:
+                      "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+                  }}
+                />
+              )}
 
-            {/* Middle Horizontal Fading Divider Line (Fades from left & right sides) */}
-            <div
-              className="hidden lg:block absolute top-1/2 left-0 right-0 h-[1px] bg-white/15 pointer-events-none z-10"
-              style={{
-                maskImage:
-                  "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-              }}
-            />
+              {/* Continuous Desktop Vertical Fading Divider 2 (Top to Bottom through horizontal line) */}
+              {finalPosts.length >= 3 && (
+                <div
+                  className="hidden lg:block absolute top-0 bottom-0 w-[1px] bg-white/15 pointer-events-none z-10 left-[calc(66.666667%_+_10.66px)] xl:left-[calc(66.666667%_+_13.33px)]"
+                  style={{
+                    maskImage:
+                      "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+                  }}
+                />
+              )}
 
-            {finalPosts.map((post, index) => {
-              const isFeatured = index === 0;
-              const colIndex = index % 3; // 0: Left, 1: Middle, 2: Right
+              {/* Middle Horizontal Fading Divider Line (Only rendered when Row 2 exists, i.e., > 3 posts) */}
+              {finalPosts.length > 3 && (
+                <div
+                  className="hidden lg:block absolute top-1/2 left-0 right-0 h-[1px] bg-white/15 pointer-events-none z-10 -translate-y-1/2"
+                  style={{
+                    maskImage:
+                      "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+                    WebkitMaskImage:
+                      "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+                  }}
+                />
+              )}
 
-              // Flush left padding for column 1 and flush right padding for column 3 with increased inner spacing
-              const colPaddingClass =
-                colIndex === 0
-                  ? "lg:pl-0 lg:pr-10 xl:pr-14 py-8 sm:py-10 lg:py-14"
-                  : colIndex === 2
-                  ? "lg:pl-10 xl:pl-14 lg:pr-0 py-8 sm:py-10 lg:py-14"
-                  : "lg:px-7 xl:px-10 py-8 sm:py-10 lg:py-14";
+              {/* Unified 3-Column Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 lg:gap-y-20 gap-x-10 md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
+                {finalPosts.map((post, idx) => (
+                  <Link
+                    key={`${post.id}-${idx}`}
+                    href={`#${post.slug}`}
+                    className="group flex flex-col h-full cursor-pointer"
+                  >
+                    {/* Rectangular Image Container (Sharp 90° Edges) */}
+                    <div className="relative w-full aspect-[16/10] overflow-hidden mb-6 bg-neutral-900 border border-white/10">
+                      <img
+                        src={post.featuredImage}
+                        alt={post.title}
+                        className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      />
 
-              return (
-                <Link
-                  key={`${post.id}-${index}`}
-                  href={`#${post.slug}`}
-                  className={`group flex flex-col ${colPaddingClass} cursor-pointer`}
-                >
-                  {/* Rectangular Image Container (Sharp 90° Edges) */}
-                  <div className="relative w-full aspect-[16/10] overflow-hidden mb-6 bg-neutral-900 border border-white/10">
-                    <img
-                      src={post.featuredImage}
-                      alt={post.title}
-                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                    />
-
-                    {/* Bottom Frosted Glass Overlay: Date & Category ONLY (No Author, No Featured Tag) */}
-                    <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-black/50 backdrop-blur-md border-t border-white/10 flex items-center justify-between text-xs sm:text-sm font-medium text-white">
-                      <span className="text-neutral-200 font-semibold">{post.publishedAt}</span>
-                      <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold text-white">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Text Below Image (Clean White Title, Orange Hover Read Button) */}
-                  <div className="flex flex-col flex-1 justify-between gap-5">
-                    <div>
-                      {/* Title stays clean white */}
-                      <h3 className="text-xl sm:text-2xl font-bold text-white leading-snug mb-3 group-hover:text-neutral-200 transition-colors duration-200">
-                        {post.title}
-                      </h3>
-                      <p className="text-neutral-400 text-sm sm:text-base leading-relaxed line-clamp-3 mb-5">
-                        {post.excerpt}
-                      </p>
+                      {/* Bottom Frosted Glass Overlay: Date & Category ONLY */}
+                      <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-black/50 backdrop-blur-md border-t border-white/10 flex items-center justify-between text-xs sm:text-sm font-medium text-white">
+                        <span className="text-neutral-200 font-semibold">{post.publishedAt}</span>
+                        <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold text-white">
+                          {activeCategory !== "All" &&
+                          post.categories?.some(
+                            (c) => c.toLowerCase() === activeCategory.toLowerCase()
+                          )
+                            ? activeCategory
+                            : post.category || post.categories?.[0] || "General"}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Card "Read Article ↗" Pill Button (Turns Brand Orange on Hover) */}
-                    <div>
-                      <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/20 bg-white/5 group-hover:bg-[#EA7A24] group-hover:border-[#EA7A24] group-hover:text-neutral-950 text-white font-semibold text-xs transition-all duration-300 shadow-sm">
-                        <span>Read Article</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+                    {/* Text Below Image (Clean White Title, Orange Hover Read Button) */}
+                    <div className="flex flex-col flex-1 justify-between gap-5">
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white leading-snug mb-3 group-hover:text-neutral-200 transition-colors duration-200">
+                          {post.title}
+                        </h3>
+                        <p className="text-neutral-400 text-sm sm:text-base leading-relaxed line-clamp-3 mb-5">
+                          {post.excerpt}
+                        </p>
+                      </div>
 
+                      {/* Card Read Button */}
+                      <div>
+                        <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/20 bg-white/5 group-hover:bg-[#EA7A24] group-hover:border-[#EA7A24] group-hover:text-neutral-950 text-white font-semibold text-xs transition-all duration-300 shadow-sm">
+                          <span>Read Article</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
       </div>

@@ -227,7 +227,7 @@ export default function Testimonials() {
   const visibleTestimonials = isExpanded ? testimonialsData : testimonialsData.slice(0, 6);
 
   return (
-    <section className="relative w-full pt-28 sm:pt-36 lg:pt-40 pb-12 sm:pb-14 lg:pb-16 bg-[#070707] font-sans overflow-hidden">
+    <section className="relative w-full pt-28 sm:pt-36 lg:pt-40 pb-0 bg-[#070707] font-sans overflow-hidden">
       {/* Background Seamless SVG Film Grain */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden" aria-hidden="true">
         <svg
